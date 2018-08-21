@@ -27,12 +27,21 @@ module.exports = (function() {
         });
   }
 
+  function insert(f_name, l_name, birthdate) {
+    knex('famous_people').insert({
+      first_name: f_name,
+      last_name: l_name,
+      birthdate: birthdate
+    }).then(()=> {knex.destroy()});
+  }
+
   function finish() {
     knex.destroy();
   }
 
   return {
     lookupByName: lookupByName,
-    finish: finish
+    finish: finish,
+    insert: insert
   }
 });
